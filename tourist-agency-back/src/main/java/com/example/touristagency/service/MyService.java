@@ -4,8 +4,8 @@ import com.example.touristagency.dto.MyDto;
 import com.example.touristagency.exception.MyEntityAlreadyExists;
 import com.example.touristagency.exception.MyEntityDoesntExist;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 

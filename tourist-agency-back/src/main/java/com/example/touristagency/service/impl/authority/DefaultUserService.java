@@ -12,6 +12,7 @@ import com.example.touristagency.repository.authority.UserRepository;
 import com.example.touristagency.requests.authority.CreateUserRequest;
 import com.example.touristagency.service.RoleService;
 import com.example.touristagency.service.UserService;
+import com.example.touristagency.service.impl.MailService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

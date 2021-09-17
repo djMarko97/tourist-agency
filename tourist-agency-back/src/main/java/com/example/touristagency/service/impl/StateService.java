@@ -6,6 +6,7 @@ import com.example.touristagency.exception.MyEntityAlreadyExists;
 import com.example.touristagency.exception.MyEntityDoesntExist;
 import com.example.touristagency.mapper.StateMapper;
 import com.example.touristagency.repository.StateRepository;
+import com.example.touristagency.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

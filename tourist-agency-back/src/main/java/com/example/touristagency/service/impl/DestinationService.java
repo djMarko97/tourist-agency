@@ -8,6 +8,7 @@ import com.example.touristagency.exception.MyEntityDoesntExist;
 import com.example.touristagency.mapper.DestinationMapper;
 import com.example.touristagency.repository.DestinationRepository;
 import com.example.touristagency.repository.StateRepository;
+import com.example.touristagency.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class DestinationService implements MyService<DestinationDto, Long>{
+public class DestinationService implements MyService<DestinationDto, Long> {
 
     private DestinationMapper mapper;
     private DestinationRepository destinationRepository;

@@ -11,6 +11,7 @@ import com.example.touristagency.mapper.HotelMapper;
 import com.example.touristagency.mapper.RoomMapper;
 import com.example.touristagency.repository.HotelRepository;
 import com.example.touristagency.repository.RoomRepository;
+import com.example.touristagency.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class RoomService implements MyService<RoomDto, RoomIdentity>{
+public class RoomService implements MyService<RoomDto, RoomIdentity> {
     private RoomMapper mapper;
     private RoomRepository repository;
     private HotelRepository hotelRepository;
