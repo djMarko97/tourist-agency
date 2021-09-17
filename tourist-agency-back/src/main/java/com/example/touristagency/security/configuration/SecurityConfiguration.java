@@ -87,20 +87,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 UsernamePasswordAuthenticationFilter.class
         );
 
-        /**
-         * Configuring password encode schema
-         * @return
-         */
 
-        @Bean
-        public PasswordEncoder passwordEncoder(){
-            return new BCryptPasswordEncoder();
-        }
+    }
+    /**
+     * Configuring password encode schema
+     * @return
+     */
 
-        @Override
-        @Bean
-        public AuthenticationManager authenticationManagerBean() throws Exception{
-            return super.authenticationManagerBean();
-        }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
     }
 }
