@@ -1,5 +1,6 @@
 package com.example.touristagency.controller;
 
+import com.example.touristagency.dto.HotelDto;
 import com.example.touristagency.dto.MyDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,7 @@ public interface RestHotelController<DTO extends MyDto, ID> {
 
     @ResponseBody ResponseEntity<Object> deleteById(@PathVariable Long ID);
 
-    @ResponseBody ResponseEntity<Object> update(@RequestBody DTO dto);
+    @ResponseBody ResponseEntity<Object> update(@RequestBody HotelDto dto);
 
     @ResponseBody ResponseEntity<Page<DTO>> getByPage(Pageable pageable);
 }
