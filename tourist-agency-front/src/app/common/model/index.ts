@@ -1,0 +1,6 @@
+export * from './arrangement.model'
+export * from './room.model'
+export * from './user.model'
+export * from './hotel.model'
+export * from './transportation.model'
+export * from './destination.model'
