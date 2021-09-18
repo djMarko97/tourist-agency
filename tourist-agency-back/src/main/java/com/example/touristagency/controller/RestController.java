@@ -15,11 +15,11 @@ public interface RestController<DTO extends MyDto, ID> {
     @ResponseBody
     ResponseEntity<List<DTO>> getAll();
 
-    @ResponseBody ResponseEntity<Object> findById(@PathVariable Long ID);
+    @ResponseBody ResponseEntity<Object> findById(@PathVariable Long id);
 
     @ResponseBody ResponseEntity<Object> save(@RequestBody DTO dto);
 
-    @ResponseBody ResponseEntity<Object> deleteById(@PathVariable Long ID);
+    @ResponseBody ResponseEntity<Object> deleteById(@PathVariable Long id);
 
     @ResponseBody ResponseEntity<Object> update(@RequestBody DTO dto);
 

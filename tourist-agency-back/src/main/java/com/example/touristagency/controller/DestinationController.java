@@ -38,12 +38,12 @@ public class DestinationController implements com.example.touristagency.controll
 
     @GetMapping(path="/{id}")
     @Override
-    public ResponseEntity<Object> findById(@PathVariable Long ID) {
-        Optional<DestinationDto> dto = destinationService.findById(ID);
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        Optional<DestinationDto> dto = destinationService.findById(id);
         if (dto.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(dto.get());
         } else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Destination with id: " + ID + " was not found!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Destination with id: " + id + " was not found!");
     }
 
     @PostMapping

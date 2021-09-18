@@ -1,23 +1,26 @@
 package com.example.touristagency.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.PathResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 
+@Service
+@RequiredArgsConstructor
 public class MailService {
-    private JavaMailSender javaMailSender;
 
     @Autowired
-    public MailService(JavaMailSender javaMailSender){
-        this.javaMailSender = javaMailSender;
-    }
+    private final JavaMailSender javaMailSender;
+
 
     /**
      * Slanje mejla bez slike

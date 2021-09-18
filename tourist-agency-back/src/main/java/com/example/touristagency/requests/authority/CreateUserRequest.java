@@ -1,5 +1,6 @@
 package com.example.touristagency.requests.authority;
 
+import com.example.touristagency.dto.MyDto;
 import com.example.touristagency.dto.ReservationDto;
 
 import javax.validation.constraints.NotBlank;
@@ -11,7 +12,7 @@ import java.util.Set;
  * Create user request
  * @author djMarko97
  */
-public class CreateUserRequest extends BaseUserRequest{
+public class CreateUserRequest extends BaseUserRequest implements MyDto {
 
     /** Repeated password **/
     @NotBlank

@@ -28,7 +28,7 @@ public interface RestHotelController<DTO extends MyDto, ID> {
             @RequestParam("destination_id") Long destination_id,
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException;
 
-    @ResponseBody ResponseEntity<Object> deleteById(@PathVariable Long ID);
+    @ResponseBody ResponseEntity<Object> deleteById(@PathVariable Long id);
 
     @ResponseBody ResponseEntity<Object> update(@RequestBody HotelDto dto);
 

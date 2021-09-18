@@ -1,6 +1,6 @@
 package com.example.touristagency.controller.authority;
 
-import com.example.touristagency.controller.RestController;
+
 import com.example.touristagency.dto.ReservationDto;
 import com.example.touristagency.dto.UserDto;
 import com.example.touristagency.entity.authority.UserEntity;
@@ -9,6 +9,7 @@ import com.example.touristagency.requests.authority.AuthUserRequest;
 import com.example.touristagency.requests.authority.CreateUserRequest;
 import com.example.touristagency.security.JwtTokenUtil;
 import com.example.touristagency.security.authorization.IsUser;
+import org.springframework.web.bind.annotation.RestController;
 import com.example.touristagency.service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Set;
 
-@RestController
-@RequestMapping("auth")
+@RestController @RequestMapping("auth")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;

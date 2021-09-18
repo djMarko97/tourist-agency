@@ -16,13 +16,13 @@ public interface RestRoomController<DTO extends MyDto, ID> {
     @ResponseBody
     ResponseEntity<List<DTO>> getAll();
 
-    @ResponseBody ResponseEntity<Object> findById(@PathVariable RoomIdentity ID);
+    @ResponseBody ResponseEntity<Object> findById(@PathVariable RoomIdentity id);
 
-    @ResponseBody ResponseEntity<List<DTO>> findRoomsByHotelId(@PathVariable Long ID);
+    @ResponseBody ResponseEntity<List<DTO>> findRoomsByHotelId(@PathVariable Long id);
 
     @ResponseBody ResponseEntity<Object> save(@RequestBody DTO dto);
 
-    @ResponseBody ResponseEntity<Object> deleteById(@RequestBody RoomIdentity ID);
+    @ResponseBody ResponseEntity<Object> deleteById(@RequestBody RoomIdentity id);
 
     @ResponseBody ResponseEntity<Object> update(@RequestBody DTO dto);
 
