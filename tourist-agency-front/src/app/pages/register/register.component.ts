@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {AuthService} from '../../services/authority/auth.service';
 import {Router} from '@angular/router';
-import {CreateUser} from '../../common/components/model/user.model';
+import {CreateUser} from '../../common/model/user.model';
 import {first} from 'rxjs/operators';
 
 @Component({
