@@ -7,14 +7,21 @@ import { HeaderComponent } from './common/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { BaseRegisterComponent } from './common/base-register/base-register.component';
+<<<<<<< Updated upstream
 import { CommonModule } from '@angular/common';
+=======
+import { RegisterComponent } from './pages/register/register.component';
+import { BasicLayoutComponent } from './layouts/basic-layout/basic-layout.component';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    BaseRegisterComponent
+    BaseRegisterComponent,
+    RegisterComponent,
+    BasicLayoutComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,38 @@
-<p>header works!</p>
+<div class="navbar-container">
+    <mat-toolbar color="primary">
+      <button (click)="sidenav.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Tourist Agency</span>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidenav-content">
+      <mat-sidenav #sidenav mode="over">
+        <mat-nav-list>
+          <a (click)="sidenav.toggle()" *ngIf="this.isAdmin" mat-list-item routerLink="/hotels">
+            <mat-icon>hotel</mat-icon>
+            <span class="nav-caption">Create hotel</span>
+          </a>
+          <a (click)="sidenav.toggle()" *ngIf="this.isAdmin" mat-list-item routerLink="/arrangement">
+            <mat-icon>loyalty</mat-icon>
+            <span class="nav-caption">Create arrangement</span>
+          </a>
+          <a (click)="sidenav.toggle()" mat-list-item routerLink="/add-reservation">
+            <mat-icon>airplanemode_active</mat-icon>
+            <span class="nav-caption">Arrangements</span>
+          </a>
+          <a (click)="sidenav.toggle()" *ngIf="!this.isAdmin" mat-list-item routerLink="/my-reservations">
+            <mat-icon>card_travel</mat-icon>
+            <span class="nav-caption">My arrangements</span>
+          </a>
+          <a (click)="sidenav.toggle()" mat-list-item>
+            <mat-icon>logout</mat-icon>
+            <span (click)="this.logout()" class="nav-caption">Logout</span>
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
