@@ -10,13 +10,8 @@ const routes: Routes = [
 
   ]},
   {
-<<<<<<< Updated upstream
     path: '', component: BasicLayoutComponent, children:[
       {path: 'login', canActivate:[AuthGuard], component: LoginComponent},
-=======
-    path: '', children:[
-      {path: 'login', component: LoginComponent},
->>>>>>> Stashed changes
       {path:'register', component: RegisterComponent}
     ]
   }
