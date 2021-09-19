@@ -6,12 +6,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { BasicLayoutComponent } from './layouts/basic-layout/basic-layout.component';
 const routes: Routes = [
-  {path: '', component: HeaderComponent, children:[
+  {path: '', component: HeaderComponent,  canActivate:[AuthGuard], children:[
 
   ]},
   {
+<<<<<<< Updated upstream
     path: '', component: BasicLayoutComponent, children:[
       {path: 'login', canActivate:[AuthGuard], component: LoginComponent},
+=======
+    path: '', children:[
+      {path: 'login', component: LoginComponent},
+>>>>>>> Stashed changes
       {path:'register', component: RegisterComponent}
     ]
   }
