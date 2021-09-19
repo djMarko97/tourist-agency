@@ -1,0 +1,32 @@
+<div class="base-registration-form">
+    <span *ngIf="this.headerMessage" class="header-message">{{this.headerMessage}}</span>
+  
+    <mat-card class="card">
+      <div class="card-content">
+        <mat-card-content class="content">
+          <form (ngSubmit)="this.onFormSubmit()" [formGroup]="this.registrationForm">
+            <h2>{{this.header}}</h2>
+            <mat-form-field *ngFor="let controlConfiguration of this.formConfiguration['controls']" class="form-field">
+              <input formControlName="{{controlConfiguration['controlName']}}" matInput
+                placeholder="{{controlConfiguration['placeholder']}}" [type]="controlConfiguration['type']">
+              <mat-error>
+                {{controlConfiguration['error']}}
+              </mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="this.error">
+              {{this.error}}
+            </mat-error>
+            <div class="actions">
+              <button [disabled]="this.registrationForm.invalid" class="login-button" mat-flat-button
+                      color="primary">{{this.buttonLabel}}</button>
+              <a *ngIf="this.formConfiguration['navigation']" (click)="this.redirect()" class="register-link">
+                {{this.formConfiguration['navigation']['text']}}
+              </a>
+            </div>
+          </form>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  
+  
+  </div>
