@@ -54,7 +54,7 @@ public class MailService {
 
         helper.setText("<h1>Thank you for making your reservation!<h1>", true);
 
-        helper.addAttachment("my_travel.jpeg", new PathResource("../tourist-agency-back/src/main/resources/travel.jpeg"));
+        helper.addAttachment("my_travel.jpeg", new PathResource("../tourist-agency-back/src/main/resources/travel.jpg"));
 
         javaMailSender.send(msg);
     }

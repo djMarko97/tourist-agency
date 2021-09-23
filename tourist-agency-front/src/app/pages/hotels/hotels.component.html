@@ -1,0 +1,202 @@
+<div class="container" id="main-container">
+
+  <div class="wrapper">
+    <button class="btn btn-primary" data-target="#addHotelModal" data-toggle="modal" type="button">
+      Add Hotel
+    </button>
+  </div>
+
+
+  <div class="row">
+    <div *ngFor="let hotel of hotels" class="col-md-6 col-xl-3">
+      <div class="card m-b-30">
+        <img alt="" class="card-img-top" src="{{hotel.image}}">
+        <div class="card-body align-items-center d-flex justify-content-center">
+          <h3 class="card-title">{{hotel?.name}}</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="fa fa-star float-right"></i>{{hotel?.rating}} stars</li>
+          <li class="list-group-item"><i class="fa fa-plane float-right"></i>{{hotel?.destination.name}}
+            , {{hotel?.destination.state.name}}</li>
+          <li class="list-group-item"><i class="fa fa-street-view float-right"></i>{{hotel?.address}}</li>
+        </ul>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+            <span title="Click to see details for the hotel"><a (click)="hotelDetails(hotel.id)"
+                                                                class="btn btn-warning tooltips" data-original-title="Details"
+                                                                data-placement="top"><i class="fa fa-info"></i></a></span>
+            <span title="Click to edit hotel"><a (click)="onOpenModal(hotel, 'edit')" class="btn btn-success tooltips"
+                                                 data-original-title="Edit" data-placement="top"><i
+              class="fa fa-pencil"></i></a></span>
+            <span title="Click to delete hotel"><a (click)="onOpenModal(hotel, 'delete')"
+                                                   class="btn btn-danger tooltips" data-original-title="Delete"
+                                                   data-placement="top"><i class="fa fa-trash"></i></a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Hotel Modal -->
+    <div aria-hidden="true" aria-labelledby="addHotelModalLabel" class="modal fade" data-backdrop="false" id="addHotelModal"
+         role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addHotelModalLabel">Add Hotel</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddHotel(addForm)">
+              <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input #name="ngModel" class="form-control" id="name" name="name" ngModel placeholder="Input hotel name"
+                       required type="text">
+                <small *ngIf="name.invalid && name.touched" class="form-text text-muted">You need to input name for
+                  hotel</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="address">Address</label>
+                <input #address="ngModel" class="form-control" id="address" name="address" ngModel
+                       placeholder="Input hotel address" required type="text">
+                <small *ngIf="address.invalid && address.touched" class="form-text text-muted">You need to input address
+                  for hotel</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="rating">Rating</label>
+                <input #rating="ngModel" class="form-control" id="rating" name="rating" ngModel pattern="([1-5])"
+                       placeholder="Input hotel rating" required type="number">
+                <small *ngIf="rating.invalid && rating.touched" class="form-text text-muted">Rating is mandatory field
+                  and it's range is from 1 to 5</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="destination">Destination</label>
+                <select #destination="ngModel" class="form-control" id="destination" name="destination" ngModel
+                        placeholder="Input destination" required>
+                  <option *ngFor="let destination of destinations" [ngValue]="destination">{{destination.name}}
+                    , {{destination.state.name}}</option>
+                </select>
+                <small *ngIf="destination.invalid && destination.touched" class="form-text text-muted">You need to
+                  select destination for hotel</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="image">Hotel Image</label>
+                <input (change)="onFileChanged($event)" class="form-control" id="image" name="image" ngModel placeholder="Image"
+                       required type="file">
+              </div>
+
+
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" id="add-hotel-form" type="button">Close</button>
+                <button [disabled]="addForm.invalid" class="btn btn-primary" type="submit">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div aria-hidden="true" aria-labelledby="hotelEditModalLabel" class="modal fade" data-backdrop="false" id="updateHotelModal"
+         role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateHotelModalLabel">Edit Hotel {{editHotel?.name}}</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editForm="ngForm">
+              <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input #edit_name="ngModel" class="form-control" id="name" name="name" ngModel="{{editHotel?.name}}"
+                       placeholder="Input hotel name" required type="text">
+                <small *ngIf="edit_name.invalid && edit_name.touched && edit_name.dirty" class="form-text text-muted">You
+                  need to input name for hotel</small>
+              </div>
+
+              <input class="form-control" id="id" name="id" ngModel="{{editHotel?.id}}" placeholder="Id" type="hidden">
+
+              <div class="form-group">
+                <label class="form-label" for="address">Address</label>
+                <input #edit_address="ngModel" class="form-control" id="address" name="address" ngModel="{{editHotel?.address}}"
+                       placeholder="Input hotel address" required type="text">
+                <small *ngIf="edit_address.invalid && edit_address.touched && edit_address.dirty"
+                       class="form-text text-muted">You need to input
+                  address for hotel</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="rating">Rating</label>
+                <input #edit_rating="ngModel" class="form-control" id="rating" name="rating"
+                       ngModel="{{editHotel?.rating}}" pattern="([1-5])" placeholder="Input hotel rating" required
+                       type="number">
+                <small *ngIf="edit_rating.invalid && edit_rating.touched && edit_rating.dirty"
+                       class="form-text text-muted">Rating is mandatory field
+                  and it's range is from 1 to 5</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="destination">Destination</label>
+                <select #edit_destination="ngModel" class="form-control" id="destination" name="destination" ngModel
+                        placeholder="Input destination" required>
+                  <option *ngFor="let destination of destinations" [ngValue]="destination">{{destination.name}}
+                    , {{destination.state.name}}</option>
+                </select>
+                <small *ngIf="edit_destination.invalid && edit_destination.touched && edit_destination.pristine"
+                       class="form-text text-muted">You
+                  need to select destination for hotel</small>
+              </div>
+
+
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" id="" type="button">Close</button>
+                <button (click)="onUpdateHotel(editForm.value)" [disabled]="editForm.invalid" class="btn btn-primary"
+                        data-dismiss="modal">Save changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div aria-hidden="true" aria-labelledby="deleteModelLabel" class="modal fade" data-backdrop="false" id="deleteHotelModal"
+         role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete Hotel</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete hotel {{deleteHotel?.name}}?</p>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-dismiss="modal" type="button">No</button>
+              <button (click)="onDeleteHotel(deleteHotel?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification for no hotels -->
+  <div *ngIf="hotels?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO HOTELS!</h4>
+      <p>No Hotels were found.</p>
+    </div>
+
+  </div>
+</div>

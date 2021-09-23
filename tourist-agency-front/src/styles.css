@@ -2,3 +2,28 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-toolbar.mat-primary {
+    background: gold;
+    color: black;
+}
+
+.mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    background-color: gold;
+    color: black;
+}
+
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: gold;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: gold;
+}
+
+.mat-form-field-hide-placeholder .mat-select-placeholder {
+    color: gold;
+    -webkit-text-fill-color: gold;
+    transition: none;
+    display: block;
+}

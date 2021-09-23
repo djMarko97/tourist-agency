@@ -1,0 +1,208 @@
+<div *ngIf="hotel" class="container" id="main-container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card-body" style="text-align: center">
+        <button (click)="back()" class="btn btn-primary">Go back to hotels</button>
+      </div>
+      <div class="card" style="text-align: center">
+        <div class="card-body">
+          <h3 class="card-title align-items-center d-flex justify-content-center">{{hotel.name}}</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Destination: {{hotel.destination.name}}, {{hotel.destination.state.name}}</li>
+          <li class="list-group-item">Hotel address is {{hotel.address}}</li>
+          <li class="list-group-item">{{hotel.name}} has {{hotel.rating}} stars</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title align-items-center d-flex justify-content-center">Rooms in hotel {{hotel.name}}</h3>
+          <div class="wrapper">
+            <button class="btn btn-primary" data-target="#addRoomModal" data-toggle="modal" type="button">
+              Add Room
+            </button>
+          </div>
+          <div class="row">
+            <div *ngFor="let room of rooms" class="col-md-6 col-xl-3">
+              <div class="card m-b-30">
+                <img alt="" class="card-img-top" src="assets/roomImage/room.png">
+                <div class="card-body">
+                  <h5 class="card-title align-items-center d-flex justify-content-center">Room
+                    number: {{room?.id.room_number}}</h5>
+                  <p class="card-text">{{room?.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{room?.roomType}}</li>
+                  <li class="list-group-item">Price per night: {{room?.pricePerNight}}</li>
+                  <li class="list-group-item">Available: {{room?.available}}</li>
+                </ul>
+                <div class="card-body">
+                  <div class="float-right btn-group btn-group-sm">>
+                    <span title="Click to edit room"><a (click)="onOpenModal(room, 'edit')"
+                                                        class="btn btn-success tooltips" data-original-title="Edit"
+                                                        data-placement="top"><i
+                      class="fa fa-pencil"></i></a></span>
+                    <span title="Click to delete room"><a (click)="onOpenModal(room, 'delete')"
+                                                          class="btn btn-danger tooltips" data-original-title="Delete"
+                                                          data-placement="top"><i
+                      class="fa fa-trash"></i></a></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notification for no rooms -->
+            <div *ngIf="rooms?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+              <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">NO ROOMS!</h4>
+                <p>No Rooms were found.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Room Modal -->
+    <div aria-hidden="true" aria-labelledby="addRoomModalLabel" class="modal fade" data-backdrop="false" id="addRoomModal"
+         role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addRoomModalLabel">Add Room</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddRoom(addForm)">
+
+              <div class="form-group">
+                <label class="form-label" for="room_number">Room number</label>
+                <input #room_number="ngModel" class="form-control" id="room_number" name="room_number" ngModel
+                       placeholder="Input room number" required type="text">
+                <small *ngIf="room_number.invalid && room_number.touched" class="form-text text-muted">You need to input
+                  room number</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea #description="ngModel" class="form-control" id="description" name="description"
+                          ngModel placeholder="Input room description" required></textarea>
+                <small *ngIf="description.invalid && description.touched" class="form-text text-muted">You need to input
+                  room description</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="pricePerNight">Price per night</label>
+                <input #pricePerNight="ngModel" class="form-control" id="pricePerNight" name="pricePerNight" ngModel
+                       placeholder="Input price per night" required type="number">
+                <small *ngIf="pricePerNight.invalid && pricePerNight.touched" class="form-text text-muted">You need to
+                  input price per night for room</small>
+              </div>
+
+
+              <div class="form-group">
+                <label class="form-label" for="roomType">Room type</label>
+                <select #add_roomType="ngModel" class="form-control" id="roomType" name="roomType" ngModel required>
+                  <option *ngFor="let name of enumKeys" [value]="name"> {{roomType[name]}} </option>
+                </select>
+                <small *ngIf="add_roomType.invalid && add_roomType.touched" class="form-text text-muted">You need to
+                  select room type</small>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" id="add-room-form" type="button">Close</button>
+                <button [disabled]="addForm.invalid" class="btn btn-primary" type="submit">Save</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Room Modal -->
+    <div aria-hidden="true" aria-labelledby="roomEditModalLabel" class="modal fade" data-backdrop="false" id="updateRoomModal"
+         role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateRoomModalLabel">Edit Room {{editRoom?.id.room_number}}</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editForm="ngForm">
+
+              <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea #edit_description="ngModel" class="form-control" id="description" name="description"
+                          ngModel="{{editRoom?.description}}" placeholder="Input room description" required></textarea>
+                <small *ngIf="edit_description.invalid && edit_description.touched && edit_description.dirty"
+                       class="form-text text-muted">You need
+                  to input room description</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="pricePerNight">Price per night</label>
+                <input #edit_pricePerNight="ngModel" class="form-control" id="pricePerNight" name="pricePerNight"
+                       ngModel="{{editRoom?.pricePerNight}}" placeholder="Input price per night" required type="number">
+                <small *ngIf="edit_pricePerNight.invalid && edit_pricePerNight.touched && edit_pricePerNight.dirty"
+                       class="form-text text-muted">You
+                  need to input price per night for room</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="roomType">Room type</label>
+                <select #edit_roomType="ngModel" class="form-control" id="roomType" name="roomType" ngModel
+                        placeholder="Room type" required>
+                  <option *ngFor="let name of enumKeys" [value]="name">{{roomType[name]}}</option>
+                </select>
+                <small *ngIf="edit_roomType.invalid && edit_roomType.touched && edit_roomType.pristine"
+                       class="form-text text-muted">You need to
+                  select room type</small>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" id="" type="button">Close</button>
+                <button (click)="onUpdateRoom(editForm.value, editRoom?.id.room_number)" [disabled]="editForm.invalid"
+                        class="btn btn-primary" data-dismiss="modal">Save changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div aria-hidden="true" aria-labelledby="deleteModelLabel" class="modal fade" data-backdrop="false" id="deleteRoomModal"
+         role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete Room</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete room {{deleteRoom?.id.room_number}}?</p>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-dismiss="modal" type="button">No</button>
+              <button (click)="onDeleteRoom(deleteRoom?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,104 @@
+<div class="container">
+  <mat-card class="card-wrapper">
+    <p>
+      <mat-card-title>Create arrangement</mat-card-title>
+    </p>
+    <form (ngSubmit)="this.onSubmit()" [formGroup]="this.arrangementForm" class="form-properties">
+
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter date from and date to</mat-label>
+          <mat-date-range-input [rangePicker]="picker" [min]="this.minDate" [max]="this.maxDate">
+            <input formControlName="startDate" matStartDate
+                   placeholder="Start date">
+            <input formControlName="endDate" matEndDate
+                   placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-select (selectionChange)="this.getHotelsForDestination($event);" formControlName="destinations"
+                      placeholder="Destinations">
+            <mat-option *ngFor="let destination of this.destinations" [value]="destination.id">
+              {{destination.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="this.arrangementForm.controls.destinations">
+            {{this.fieldError}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-select formControlName="meals" placeholder="Meals">
+            <mat-option *ngFor="let meal of this.meals" [value]="meal">
+              {{meal}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="this.arrangementForm.controls.meals">
+            {{this.fieldError}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-select formControlName="hotels" placeholder="Hotels" required>
+            <mat-option *ngFor="let hotel of this.hotels" [value]="hotel.id">
+              {{hotel.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="this.hotelError">
+            {{this.hotelError}}
+          </mat-error>
+          <mat-error *ngIf="this.arrangementForm.controls.hotels">
+            {{this.fieldError}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-select formControlName="transportation" placeholder="Transportation">
+            <mat-option *ngFor="let transport of this.transportation" [value]="transport.id">
+              {{transport.type}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="this.arrangementForm.controls.transportation">
+            {{this.fieldError}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input formControlName="numberOfPeople" matInput min="0" placeholder="Number of people" type="number">
+          <mat-error *ngIf="this.arrangementForm.controls.numberOfPeople">
+            {{this.fieldError}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input formControlName="numOfArrangements" matInput min="0" placeholder="Number of arrangements" type="number">
+          <mat-error *ngIf="this.arrangementForm.controls.numOfArrangements">
+            {{this.fieldError}}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <mat-error *ngIf="this.error">
+        {{this.error}}
+      </mat-error>
+      <div class="save-button">
+        <button color="primary" mat-flat-button type="submit">Save</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,62 @@
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css';
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+
+
+select.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+textarea.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0 0 10px;
+  font-weight: 600;
+  color: black;
+}
+
+i {
+  color: rgb(15, 15, 15);
+}
+
+a {
+  color: white;
+}
+
+li {
+  color:black;
+}
+
+.row {
+  padding: 15px;
+  row-gap: 20px;
+}
+
+.card-title{
+  text-align: center;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.form-label {
+  color:#050505;
+}
+
+.error-label {
+  color:rgba(233, 8, 8, 0.85)
+}
+
+

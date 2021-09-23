@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {AuthUser, CreateUser, IUser} from '../../common//model/user.model';
+import { AuthUser, CreateUser, IUser } from 'src/app/common/model';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class AuthService {
 
-  private readonly BASE_URL = 'spring/tourist-agency/auth';
+  private readonly BASE_URL = 'spring/auth';
 
   private readonly LOCAL_STORAGE_USER: string = 'currentUser';
   private readonly LOCAL_STORAGE_USER_TOKEN: string = 'userToken';

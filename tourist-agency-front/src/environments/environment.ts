@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseHttpURL: 'spring/tourist-agency',
+  baseHttpURL: 'spring',
   production: false
 };
 

@@ -1,0 +1,35 @@
+.column {
+  float: left;
+  width: 33,3%;
+  padding: 15px;
+  color: black;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) {
+  .column {
+    width: 100%;
+  }
+}
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: 20px;
+  background-color: rgba(49, 48, 48, 0.9);
+
+}
+
+mat-form-field {
+  margin-right: 12px;
+
+}
